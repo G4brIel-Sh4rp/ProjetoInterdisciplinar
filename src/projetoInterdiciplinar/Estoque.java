@@ -4,18 +4,19 @@ package projetoInterdiciplinar;
 import java.util.*;
 import javax.swing.JOptionPane;
 
-public class EstoqueCelulares{
+public class Estoque{
     
-    private ArrayList listaCelulares;
+    private ArrayList listaProdutos = new ArrayList<Produto>();
     
-    public EstoqueCelulares (ArrayList lista){
-        listaCelulares = lista;
+    public Estoque (ArrayList lista){
+        listaProdutos = lista;
     }
     
+    //Construtores e Metodos para Celulares
     public Celulares getProduto(int id){
         try{
-            for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
+            for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i); //Polimorfismo
                 if(p.id == id){
                     return p;
                 }
@@ -30,7 +31,7 @@ public class EstoqueCelulares{
     }
     public void addProduto(Celulares p){
         if(verificaId(p.id)){   
-            listaCelulares.add(p);
+            listaProdutos.add(p);
         }
         else{
             JOptionPane.showMessageDialog(null, "Id já existe, não foi possível adicionar produto", "Erro", 0);
@@ -39,8 +40,8 @@ public class EstoqueCelulares{
     
     public float valorTotal(){
         float acm = 0;
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
                 acm += p.valorTotal();
         }
         return acm;
@@ -49,8 +50,8 @@ public class EstoqueCelulares{
     
     public ArrayList listar(String marca){
     ArrayList aux = new ArrayList();
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
                 if(p.getMarca().equalsIgnoreCase(marca)){
                     aux.add(p);
                 }
@@ -59,9 +60,11 @@ public class EstoqueCelulares{
     }
     public ArrayList listar(int ano){
     ArrayList aux = new ArrayList();
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
-                if(p.getLancamento().getYear() == ano){
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
+                int anoLancamento = p.getLancamento().getYear();
+
+                if( anoLancamento == ano){
                     aux.add(p);
                 }
         }
@@ -69,8 +72,8 @@ public class EstoqueCelulares{
     }
     public ArrayList listar(int anoMin, int anoMax){
     ArrayList aux = new ArrayList();
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
                 if(p.getLancamento().getYear() > anoMin && p.getLancamento().getYear() < anoMax){
                     aux.add(p);
                 }
@@ -79,8 +82,8 @@ public class EstoqueCelulares{
     }
     public ArrayList listar(float precoMin, float precoMax){
     ArrayList aux = new ArrayList();
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
                 if(p.getPreco() > precoMin && p.getPreco() < precoMax){
                     aux.add(p);
                 }
@@ -90,9 +93,9 @@ public class EstoqueCelulares{
     
     public ArrayList GerarRelatorio(){
         ArrayList aux = new ArrayList();
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Celulares p = (Celulares) listaCelulares.get(i);
-                if(p.getQnt()<= p.getMinQnt()){
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Celulares p = (Celulares) listaProdutos.get(i);
+                if(p.getQnt()<= p.getQntMin()){
                     aux.add(p);
                 }
         }
@@ -102,8 +105,8 @@ public class EstoqueCelulares{
     
     //verifica se já existe o mesmo id, se sim : false.
     private boolean verificaId(int id) {  
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Produto p = (Produto) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Produto p = (Produto) listaProdutos.get(i);
                 if(p.id == id){
                     return false;
                 }
@@ -113,8 +116,8 @@ public class EstoqueCelulares{
     // Encontra um valor para novos Id's
     private int getNewId(){ 
         int maiorId = 0;
-        for (int i = 0; i < listaCelulares.size(); i++) {
-                Produto p = (Produto) listaCelulares.get(i);
+        for (int i = 0; i < listaProdutos.size(); i++) {
+                Produto p = (Produto) listaProdutos.get(i);
                 if(p.id > maiorId){
                     maiorId = p.id+1;
                 }
