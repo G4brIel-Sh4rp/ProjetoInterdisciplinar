@@ -39,18 +39,8 @@ public class ConsolePrincipal {
         cellList.add(p9);
         
         Estoque estoque = new Estoque(cellList);
-//        System.out.println("-------------MARCA------Kphone\n");
-//        imprimeLista(estoque.listar("KPhone"));
-//        System.out.println("\n-----------MARCA------Gunusmas\n");
-//        imprimeLista(estoque.listar("Gnusmas"));
-        System.out.println("\n-----------Ano------2018\n");        
-        for (int i = 0; i < estoque.listar(2018).size(); i++) {
-            System.out.println(estoque.listar(2018).get(i).toString());
-        }
-//        System.out.println("\n-----------Ano's------2015-17\n");
-//        imprimeLista(estoque.listar(2015,2017));
-//        System.out.println("\n-----------Preco------800-1200\n");
-//        imprimeLista(estoque.listar(800.00f, 1200.00f));
+        System.out.println("Get Produto id inexistente");
+        
     }
     public static void imprimeLista(ArrayList lista){
         for (int i = 0; i < lista.size(); i++) {

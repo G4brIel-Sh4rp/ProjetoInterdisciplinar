@@ -62,9 +62,10 @@ public class Estoque{
     ArrayList aux = new ArrayList();
         for (int i = 0; i < listaProdutos.size(); i++) {
                 Celulares p = (Celulares) listaProdutos.get(i);
-                int anoLancamento = p.getLancamento().getYear();
-
-                if( anoLancamento == ano){
+                Calendar anoLancamento = Calendar.getInstance();
+                anoLancamento.setTime(p.getLancamento());
+                
+                if( anoLancamento.get(Calendar.YEAR) == ano){
                     aux.add(p);
                 }
         }
@@ -73,8 +74,11 @@ public class Estoque{
     public ArrayList listar(int anoMin, int anoMax){
     ArrayList aux = new ArrayList();
         for (int i = 0; i < listaProdutos.size(); i++) {
-                Celulares p = (Celulares) listaProdutos.get(i);
-                if(p.getLancamento().getYear() > anoMin && p.getLancamento().getYear() < anoMax){
+                Celulares p = (Celulares) listaProdutos.get(i);              
+                Calendar anoLancamento = Calendar.getInstance();
+                anoLancamento.setTime(p.getLancamento());
+                
+                if(anoLancamento.get(Calendar.YEAR) >= anoMin && anoMax >= anoLancamento.get(Calendar.YEAR)){
                     aux.add(p);
                 }
         }
@@ -84,7 +88,7 @@ public class Estoque{
     ArrayList aux = new ArrayList();
         for (int i = 0; i < listaProdutos.size(); i++) {
                 Celulares p = (Celulares) listaProdutos.get(i);
-                if(p.getPreco() > precoMin && p.getPreco() < precoMax){
+                if(p.getPreco() >= precoMin && p.getPreco() <= precoMax){
                     aux.add(p);
                 }
         }
