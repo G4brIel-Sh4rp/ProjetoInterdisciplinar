@@ -8,11 +8,13 @@ package projetoInterdiciplinar.viwers;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import  projetoInterdiciplinar.controler.Estoque;
 import  projetoInterdiciplinar.entities.Celulares;
-import  projetoInterdiciplinar.entities.Produto;
-import java.text.DecimalFormat;
+import java.text.*;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import java.util.Calendar;
+
 
 public class JEstoque extends javax.swing.JFrame {
     private Estoque etqCell = new Estoque("teste.csv");
@@ -20,21 +22,44 @@ public class JEstoque extends javax.swing.JFrame {
     
     public JEstoque() {
         initComponents();
-        addRowTblCelulares();
+        addRowTblCelulares(etqCell.listar());
         tblCelulares.getColumnModel().getColumn(0).setPreferredWidth(30);
         tblCelulares.getColumnModel().getColumn(1).setPreferredWidth(150);
         tblCelulares.getColumnModel().getColumn(2).setPreferredWidth(150);
         tblCelulares.getColumnModel().getColumn(3).setPreferredWidth(80);
         tblCelulares.getColumnModel().getColumn(4).setPreferredWidth(100);
         tblCelulares.getColumnModel().getColumn(5).setPreferredWidth(120);
-
+        //Set-Visiveis
+        comboBoxMarcas.setVisible(false);
+        btnBusca.setVisible(false);
+        spinnerAnoMin.setVisible(false);
+        spinnerAnoMax.setVisible(false);
+        spinnerPrecoMin.setVisible(false);
+        spinnerPrecoMax.setVisible(false);
+        lblEntre.setVisible(false);
+  
+        
+        
+        for (int i = 0; i < etqCell.getMarcas().length; i++) {
+            comboBoxMarcas.addItem(etqCell.getMarcas()[i]);
+        }
+        Calendar c = Calendar.getInstance();
+        int anoAtual = c.get(Calendar.YEAR);
+        SpinnerModel sMin = new SpinnerNumberModel(anoAtual,2000,anoAtual,1);
+        spinnerAnoMin.setModel(sMin);
+        int anoMin = (int) spinnerAnoMin.getValue();
+        SpinnerModel sMax = new SpinnerNumberModel(anoAtual,anoMin,anoAtual+1,1);
+        spinnerAnoMax.setModel(sMax);
+        float precoMin = (float) spinnerPrecoMin.getValue();
+        SpinnerModel sPrecoMax = new SpinnerNumberModel(precoMin+200,precoMin,50000,100);
+        spinnerPrecoMax.setModel(sPrecoMax);
     }
-    public void addRowTblCelulares(){
+    public void addRowTblCelulares(ArrayList lista){
         SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
         DecimalFormat df = new DecimalFormat("#.00");
         
         DefaultTableModel modelo = (DefaultTableModel) tblCelulares.getModel();
-        ArrayList<Celulares> list = etqCell.listar();
+        ArrayList<Celulares> list = lista;
                           
         Object rowData[] = new Object[6];
         
@@ -46,9 +71,18 @@ public class JEstoque extends javax.swing.JFrame {
             rowData[4] = "R$  "+ df.format(list.get(i).getPreco());
             rowData[5] = formatar.format(list.get(i).getLancamento());
             modelo.addRow(rowData);
-        }
-    
+            
+        }  
     }
+    private void limpaTabela(){
+        DefaultTableModel modelo = (DefaultTableModel) tblCelulares.getModel();
+            if (modelo.getRowCount() > 0){
+                int n =  modelo.getRowCount();
+                for (int i=0;i<n;i++){
+                    modelo.removeRow(0);
+                }            
+        }
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,14 +93,44 @@ public class JEstoque extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCelulares = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        btnBusca = new javax.swing.JButton();
+        comboBoxMarcas = new javax.swing.JComboBox<>();
+        spinnerAnoMin = new javax.swing.JSpinner();
+        spinnerAnoMax = new javax.swing.JSpinner();
+        lblEntre = new javax.swing.JLabel();
+        spinnerPrecoMin = new javax.swing.JSpinner();
+        spinnerPrecoMax = new javax.swing.JSpinner();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtBoxId = new javax.swing.JTextField();
+        txtBoxModelo = new javax.swing.JTextField();
+        txtBoxMarca = new javax.swing.JTextField();
+        txtBoxQntdMin = new javax.swing.JTextField();
+        txtBoxPreco = new javax.swing.JTextField();
+        txtBoxLancamento = new javax.swing.JTextField();
+        txtBoxQntd = new javax.swing.JTextField();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 250));
-        setPreferredSize(new java.awt.Dimension(900, 590));
+        setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(null);
+
+        jPanel1.setOpaque(false);
 
         tblCelulares.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -85,6 +149,7 @@ public class JEstoque extends javax.swing.JFrame {
             }
         });
         tblCelulares.setGridColor(new java.awt.Color(255, 255, 255));
+        tblCelulares.setOpaque(false);
         tblCelulares.setRowHeight(20);
         tblCelulares.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         jScrollPane1.setViewportView(tblCelulares);
@@ -94,18 +159,349 @@ public class JEstoque extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 37, 652, 481);
+        jPanel1.setBounds(0, 67, 590, 450);
+
+        jLabel1.setText("Buscar Por:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 16, 70, 30);
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Marca", "Preço", "Data de Lançamento" }));
+        jComboBox1.setSelectedIndex(-1);
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(100, 20, 110, 25);
+
+        btnBusca.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
+        btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/LupaIcon1-2.png"))); // NOI18N
+        btnBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBusca);
+        btnBusca.setBounds(490, 20, 40, 25);
+
+        comboBoxMarcas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMarcasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxMarcas);
+        comboBoxMarcas.setBounds(360, 20, 120, 25);
+
+        spinnerAnoMin.setToolTipText("");
+        spinnerAnoMin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerAnoMinStateChanged(evt);
+            }
+        });
+        getContentPane().add(spinnerAnoMin);
+        spinnerAnoMin.setBounds(310, 20, 70, 25);
+
+        spinnerAnoMax.setToolTipText("");
+        spinnerAnoMax.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerAnoMaxStateChanged(evt);
+            }
+        });
+        getContentPane().add(spinnerAnoMax);
+        spinnerAnoMax.setBounds(410, 20, 70, 25);
+
+        lblEntre.setText("  até");
+        getContentPane().add(lblEntre);
+        lblEntre.setBounds(380, 20, 30, 30);
+
+        spinnerPrecoMin.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(1000.0f), Float.valueOf(100.0f), Float.valueOf(50000.0f), Float.valueOf(100.0f)));
+        spinnerPrecoMin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerPrecoMinStateChanged(evt);
+            }
+        });
+        getContentPane().add(spinnerPrecoMin);
+        spinnerPrecoMin.setBounds(310, 20, 70, 25);
+
+        spinnerPrecoMax.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(1000.0f), Float.valueOf(100.0f), Float.valueOf(50000.0f), Float.valueOf(100.0f)));
+        getContentPane().add(spinnerPrecoMax);
+        spinnerPrecoMax.setBounds(410, 20, 70, 25);
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setText("Qntd. Mínima");
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel10.setText("Quantidade");
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setText("Lançamento");
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setText("Preço");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setText("Marca");
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel6.setText("Modelo");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel5.setText("ID");
+
+        jLabel3.setFont(new java.awt.Font("Myanmar Text", 1, 24)); // NOI18N
+        jLabel3.setText("  DADOS DO PRODUTO");
+
+        txtBoxId.setEditable(false);
+        txtBoxId.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxId.setText("-");
+        txtBoxId.setToolTipText("");
+
+        txtBoxModelo.setEditable(false);
+        txtBoxModelo.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxModelo.setText("-");
+        txtBoxModelo.setToolTipText("");
+
+        txtBoxMarca.setEditable(false);
+        txtBoxMarca.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxMarca.setText("-");
+        txtBoxMarca.setToolTipText("");
+        txtBoxMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxMarcaActionPerformed(evt);
+            }
+        });
+
+        txtBoxQntdMin.setEditable(false);
+        txtBoxQntdMin.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxQntdMin.setText("-");
+        txtBoxQntdMin.setToolTipText("");
+        txtBoxQntdMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxQntdMinActionPerformed(evt);
+            }
+        });
+
+        txtBoxPreco.setEditable(false);
+        txtBoxPreco.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxPreco.setText("-");
+        txtBoxPreco.setToolTipText("");
+        txtBoxPreco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxPrecoActionPerformed(evt);
+            }
+        });
+
+        txtBoxLancamento.setEditable(false);
+        txtBoxLancamento.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxLancamento.setText("-");
+        txtBoxLancamento.setToolTipText("");
+        txtBoxLancamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxLancamentoActionPerformed(evt);
+            }
+        });
+
+        txtBoxQntd.setEditable(false);
+        txtBoxQntd.setBackground(new java.awt.Color(255, 255, 255));
+        txtBoxQntd.setText("-");
+        txtBoxQntd.setToolTipText("");
+        txtBoxQntd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBoxQntdActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtBoxQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxId, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxQntd, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxQntd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBoxQntdMin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 24, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(600, 10, 290, 310);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String aux = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
+        switch (aux) {
+            case "Id":
+                    btnBusca.setVisible(true);
+                    comboBoxMarcas.setVisible(false);
+                    spinnerAnoMin.setVisible(false);
+                    spinnerAnoMax.setVisible(false);
+                    spinnerPrecoMin.setVisible(false);
+                    spinnerPrecoMax.setVisible(false);
+                    lblEntre.setVisible(false);                    
+                break;
+            case "Marca":
+                    btnBusca.setVisible(true);
+                    comboBoxMarcas.setVisible(true);
+                    spinnerAnoMin.setVisible(false);
+                    spinnerAnoMax.setVisible(false);
+                    spinnerPrecoMin.setVisible(false);
+                    spinnerPrecoMax.setVisible(false);
+                    lblEntre.setVisible(false);
+                break;
+            case "Preço":
+                    btnBusca.setVisible(true);
+                    comboBoxMarcas.setVisible(false);
+                    spinnerAnoMin.setVisible(false);
+                    spinnerAnoMax.setVisible(false);
+                    spinnerPrecoMin.setVisible(true);
+                    spinnerPrecoMax.setVisible(true);
+                    lblEntre.setVisible(true);
+                    break;
+            default:
+                    btnBusca.setVisible(true);
+                    comboBoxMarcas.setVisible(false);
+                    spinnerAnoMin.setVisible(true);
+                    spinnerAnoMax.setVisible(true);
+                    spinnerPrecoMin.setVisible(false);
+                    spinnerPrecoMax.setVisible(false);
+                    lblEntre.setVisible(true);
+                break;                  
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void comboBoxMarcasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMarcasActionPerformed
+        
+    }//GEN-LAST:event_comboBoxMarcasActionPerformed
+
+    private void spinnerAnoMaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerAnoMaxStateChanged
+        
+    }//GEN-LAST:event_spinnerAnoMaxStateChanged
+
+    private void spinnerAnoMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerAnoMinStateChanged
+        Calendar c = Calendar.getInstance();
+        int anoAtual = c.get(Calendar.YEAR);
+        int anoMin = (int) spinnerAnoMin.getValue();
+        SpinnerModel sMax = new SpinnerNumberModel(anoMin,anoMin,anoAtual+1,1);
+        spinnerAnoMax.setModel(sMax);
+    }//GEN-LAST:event_spinnerAnoMinStateChanged
+
+    private void spinnerPrecoMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerPrecoMinStateChanged
+        float precoMin = (float) spinnerPrecoMin.getValue();
+        SpinnerModel sPrecoMax = new SpinnerNumberModel(precoMin+200,precoMin,50000,100);
+        spinnerPrecoMax.setModel(sPrecoMax);
+    }//GEN-LAST:event_spinnerPrecoMinStateChanged
+
+    private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
+        String aux = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
+        switch (aux) {
+            case "Id":                   
+                break;
+            case "Marca":
+                String marca = (String) comboBoxMarcas.getSelectedItem();
+                limpaTabela();
+                addRowTblCelulares(etqCell.listar(marca));
+                break;
+            case "Preço":
+                    float pMin = (float) spinnerPrecoMin.getValue();
+                    float pMax = (float) spinnerPrecoMax.getValue();
+                    limpaTabela();
+                    addRowTblCelulares(etqCell.listar(pMin,pMax));
+                    break;
+            default:
+                    int dMin = (int) spinnerAnoMin.getValue();
+                    int dMax = (int) spinnerAnoMax.getValue();
+                    limpaTabela();
+                    addRowTblCelulares(etqCell.listar(dMin,dMax));
+                break;                  
+        }
+       
+    }//GEN-LAST:event_btnBuscaActionPerformed
+
+    private void txtBoxMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxMarcaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBoxMarcaActionPerformed
+
+    private void txtBoxQntdMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxQntdMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBoxQntdMinActionPerformed
+
+    private void txtBoxPrecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxPrecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBoxPrecoActionPerformed
+
+    private void txtBoxLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxLancamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBoxLancamentoActionPerformed
+
+    private void txtBoxQntdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxQntdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBoxQntdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +539,34 @@ public class JEstoque extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBusca;
+    private javax.swing.JComboBox<String> comboBoxMarcas;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblEntre;
+    private javax.swing.JSpinner spinnerAnoMax;
+    private javax.swing.JSpinner spinnerAnoMin;
+    private javax.swing.JSpinner spinnerPrecoMax;
+    private javax.swing.JSpinner spinnerPrecoMin;
     private javax.swing.JTable tblCelulares;
+    private javax.swing.JTextField txtBoxId;
+    private javax.swing.JTextField txtBoxLancamento;
+    private javax.swing.JTextField txtBoxMarca;
+    private javax.swing.JTextField txtBoxModelo;
+    private javax.swing.JTextField txtBoxPreco;
+    private javax.swing.JTextField txtBoxQntd;
+    private javax.swing.JTextField txtBoxQntdMin;
     // End of variables declaration//GEN-END:variables
 }
