@@ -1,10 +1,12 @@
 
-package projetoInterdiciplinar;
+package projetoInterdiciplinar.entities;
 
+import projetoInterdiciplinar.entities.Produto;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.text.DecimalFormat;
 
 public class Celulares extends Produto{
     private int qntMin;
@@ -56,9 +58,9 @@ public class Celulares extends Produto{
         }
     } 
     @Override
-        protected String validaNome (String nome){  
+        protected String validaNome (String nome) throws ClassFormatError{  
         try{
-            if (nome.length() >= 3 && nome.length()<20){
+            if (nome.length() >= 2 && nome.length()<20){
                     if (!nome.isBlank() || !nome.isEmpty() || !isNumeric(nome)){
                         return nome;
                     }
@@ -69,11 +71,13 @@ public class Celulares extends Produto{
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", 0);
+             
         }
         return this.nome;
     }
     @Override
     public String toString(){
-        return id+", "+nome+", "+marca+", "+qntEstoque+", "+qntMin+", "+preco+", "+padraoData.format(dataLancamento);
+        DecimalFormat df = new DecimalFormat("#.00");
+        return id+","+nome+","+marca+","+qntEstoque+","+qntMin+","+preco+","+padraoData.format(dataLancamento);
     }
 }

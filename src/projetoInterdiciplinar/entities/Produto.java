@@ -1,7 +1,8 @@
 
-package projetoInterdiciplinar;
+package projetoInterdiciplinar.entities;
 
 import javax.swing.JOptionPane;
+import projetoInterdiciplinar.controler.AplicationException;
 
 /*TODO Set's de numeros verificar se é numerico
 Get's Gerais
@@ -31,6 +32,7 @@ public abstract class Produto {
     public void setMarca (String marca){
         this.marca = validaNome(marca);
     }
+
     
     public abstract void atualizaEstoque (int qnt); // para incremento e decremento do valor estoque
 //        int aux = qntEstoque;
@@ -42,6 +44,9 @@ public abstract class Produto {
     }
     
     //métodos get
+        public int getId (){
+        return id;
+    }
     public String getNome(){
         return nome;
     }
@@ -92,7 +97,7 @@ public abstract class Produto {
 //        return this.nome;
 //    }
     
-    protected boolean isNumeric(String strNum) {
+    protected boolean isNumeric(String strNum){
         if (strNum == null) {
             return false;
         }
