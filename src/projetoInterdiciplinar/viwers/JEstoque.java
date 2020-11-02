@@ -14,11 +14,13 @@ import java.text.*;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 
 public class JEstoque extends javax.swing.JFrame {
     private Estoque etqCell = new Estoque("teste.csv");
-    
+    DecimalFormat df = new DecimalFormat("#.00");
+    SimpleDateFormat formatarData = new SimpleDateFormat("dd/MM/yyyy");
     
     public JEstoque() {
         initComponents();
@@ -31,6 +33,7 @@ public class JEstoque extends javax.swing.JFrame {
         tblCelulares.getColumnModel().getColumn(5).setPreferredWidth(120);
         //Set-Visiveis
         comboBoxMarcas.setVisible(false);
+        SpinnerId.setVisible(false);
         btnBusca.setVisible(false);
         spinnerAnoMin.setVisible(false);
         spinnerAnoMax.setVisible(false);
@@ -55,8 +58,8 @@ public class JEstoque extends javax.swing.JFrame {
         spinnerPrecoMax.setModel(sPrecoMax);
     }
     public void addRowTblCelulares(ArrayList lista){
-        SimpleDateFormat formatar = new SimpleDateFormat("dd/MM/yyyy");
-        DecimalFormat df = new DecimalFormat("#.00");
+        
+        
         
         DefaultTableModel modelo = (DefaultTableModel) tblCelulares.getModel();
         ArrayList<Celulares> list = lista;
@@ -69,7 +72,7 @@ public class JEstoque extends javax.swing.JFrame {
             rowData[2] = list.get(i).getMarca();
             rowData[3] = list.get(i).getQnt();
             rowData[4] = "R$  "+ df.format(list.get(i).getPreco());
-            rowData[5] = formatar.format(list.get(i).getLancamento());
+            rowData[5] = formatarData.format(list.get(i).getLancamento());
             modelo.addRow(rowData);
             
         }  
@@ -98,6 +101,7 @@ public class JEstoque extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCelulares = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        SpinnerId = new javax.swing.JSpinner();
         jComboBox1 = new javax.swing.JComboBox<>();
         btnBusca = new javax.swing.JButton();
         comboBoxMarcas = new javax.swing.JComboBox<>();
@@ -122,6 +126,7 @@ public class JEstoque extends javax.swing.JFrame {
         txtBoxPreco = new javax.swing.JTextField();
         txtBoxLancamento = new javax.swing.JTextField();
         txtBoxQntd = new javax.swing.JTextField();
+        btnLimpar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -152,6 +157,11 @@ public class JEstoque extends javax.swing.JFrame {
         tblCelulares.setOpaque(false);
         tblCelulares.setRowHeight(20);
         tblCelulares.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tblCelulares.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCelularesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCelulares);
         tblCelulares.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
@@ -173,6 +183,11 @@ public class JEstoque extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(20, 16, 70, 30);
 
+        SpinnerId.setModel(new javax.swing.SpinnerNumberModel(0, 0, 1000, 1));
+        SpinnerId.setToolTipText("Id");
+        getContentPane().add(SpinnerId);
+        SpinnerId.setBounds(410, 20, 70, 25);
+
         jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Marca", "Preço", "Data de Lançamento" }));
         jComboBox1.setSelectedIndex(-1);
@@ -182,7 +197,7 @@ public class JEstoque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(100, 20, 110, 25);
+        jComboBox1.setBounds(100, 20, 160, 25);
 
         btnBusca.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
         btnBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/LupaIcon1-2.png"))); // NOI18N
@@ -192,7 +207,7 @@ public class JEstoque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBusca);
-        btnBusca.setBounds(490, 20, 40, 25);
+        btnBusca.setBounds(500, 20, 40, 25);
 
         comboBoxMarcas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -390,6 +405,16 @@ public class JEstoque extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(600, 10, 290, 310);
 
+        btnLimpar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
+        btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/RestartIcon.png"))); // NOI18N
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpar);
+        btnLimpar.setBounds(600, 460, 60, 50);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -398,6 +423,7 @@ public class JEstoque extends javax.swing.JFrame {
         switch (aux) {
             case "Id":
                     btnBusca.setVisible(true);
+                    SpinnerId.setVisible(true);
                     comboBoxMarcas.setVisible(false);
                     spinnerAnoMin.setVisible(false);
                     spinnerAnoMax.setVisible(false);
@@ -407,6 +433,7 @@ public class JEstoque extends javax.swing.JFrame {
                 break;
             case "Marca":
                     btnBusca.setVisible(true);
+                    SpinnerId.setVisible(false);
                     comboBoxMarcas.setVisible(true);
                     spinnerAnoMin.setVisible(false);
                     spinnerAnoMax.setVisible(false);
@@ -416,6 +443,7 @@ public class JEstoque extends javax.swing.JFrame {
                 break;
             case "Preço":
                     btnBusca.setVisible(true);
+                    SpinnerId.setVisible(false);
                     comboBoxMarcas.setVisible(false);
                     spinnerAnoMin.setVisible(false);
                     spinnerAnoMax.setVisible(false);
@@ -425,6 +453,7 @@ public class JEstoque extends javax.swing.JFrame {
                     break;
             default:
                     btnBusca.setVisible(true);
+                    SpinnerId.setVisible(false);
                     comboBoxMarcas.setVisible(false);
                     spinnerAnoMin.setVisible(true);
                     spinnerAnoMax.setVisible(true);
@@ -460,7 +489,17 @@ public class JEstoque extends javax.swing.JFrame {
     private void btnBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaActionPerformed
         String aux = jComboBox1.getItemAt(jComboBox1.getSelectedIndex());
         switch (aux) {
-            case "Id":                   
+            case "Id":
+                    limpaTabela();
+                    int id = (int) SpinnerId.getValue();
+                    Celulares c = etqCell.getProduto(id);
+                    txtBoxId.setText(Integer.toString(c.getId()));
+                    txtBoxModelo.setText(c.getNome());
+                    txtBoxMarca.setText(c.getMarca());
+                    txtBoxPreco.setText(df.format(c.getPreco()));
+                    txtBoxLancamento.setText(formatarData.format(c.getLancamento()));
+                    txtBoxQntd.setText(Integer.toString(c.getQnt()));
+                    txtBoxQntdMin.setText(Integer.toString(c.getQntMin()));
                 break;
             case "Marca":
                 String marca = (String) comboBoxMarcas.getSelectedItem();
@@ -503,6 +542,30 @@ public class JEstoque extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBoxQntdActionPerformed
 
+    private void tblCelularesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCelularesMouseClicked
+        int k = tblCelulares.getSelectedRow();
+        int id = (int) tblCelulares.getValueAt(k, 0);
+        Celulares c = etqCell.getProduto(id);
+        txtBoxId.setText(Integer.toString(c.getId()));
+        txtBoxModelo.setText(c.getNome());
+        txtBoxMarca.setText(c.getMarca());
+        txtBoxPreco.setText(df.format(c.getPreco()));
+        txtBoxLancamento.setText(formatarData.format(c.getLancamento()));
+        txtBoxQntd.setText(Integer.toString(c.getQnt()));
+        txtBoxQntdMin.setText(Integer.toString(c.getQntMin()));
+    }//GEN-LAST:event_tblCelularesMouseClicked
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        txtBoxId.setText("-");
+        txtBoxModelo.setText("-");
+        txtBoxMarca.setText("-");
+        txtBoxPreco.setText("-");
+        txtBoxLancamento.setText("-");
+        txtBoxQntd.setText("-");
+        txtBoxQntdMin.setText("-");
+        addRowTblCelulares(etqCell.listar());
+    }//GEN-LAST:event_btnLimparActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -539,7 +602,9 @@ public class JEstoque extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSpinner SpinnerId;
     private javax.swing.JButton btnBusca;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JComboBox<String> comboBoxMarcas;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
