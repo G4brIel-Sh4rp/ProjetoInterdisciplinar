@@ -13,19 +13,9 @@ public abstract class Produto {
     protected String nome;
     protected String marca;
     protected int qntEstoque;
-//  protected int qntMin;
     protected float preco;
    
-//    public Produto (int id, String nome, String marca, int qnt, int qntMin, float preco){
-//        this.id = id;
-//        this.nome = validaNome(nome);
-//        this.marca = validaNome(marca);      
-//        this.qntEstoque = qnt;
-//        this.qntMin = qntMin;
-//        this.preco = preco;
-//    }
-    // métodos SET
-    
+
     public void setNome (String nome){
         this.nome = validaNome(nome);
     }
@@ -35,11 +25,7 @@ public abstract class Produto {
 
     
     public abstract void atualizaEstoque (int qnt); // para incremento e decremento do valor estoque
-//        int aux = qntEstoque;
-//        if (aux + qnt < 0){
-//            
-//        }
-//    }
+
     public void setEstoque (int qnt){     
     }
     

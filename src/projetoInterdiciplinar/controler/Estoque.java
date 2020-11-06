@@ -26,6 +26,8 @@ public class Estoque{
         this.caminho = path;
     }
     
+    //MÉTODOS CARREGAR E SALVAR
+    
     private void carregarCelulares(String path){
         this.caminho = path;
         Loader carregar = new Loader(path);
@@ -62,31 +64,6 @@ public class Estoque{
         salvar.ReescreverObjetos(listaProdutos, cabecalho);
     }
     
-//    private void carregarCelulares(ArrayList<String[]> lista){
-//        DateFormat padraoData = new SimpleDateFormat("dd/MM/yyyy");
-//        ArrayList end = new ArrayList<Produto>();
-//        int id = -1;
-//        try{
-//            for (int i = 0; i < lista.size(); i++) {
-//                String[] aux = lista.get(i);
-//                id = Integer.parseInt(aux[0]);
-//                String modelo = aux[1];
-//                String marca = aux[2];
-//                float preco = Float.parseFloat(aux[3]);
-//                int qnt = Integer.parseInt(aux[4]);
-//                int qntMin = Integer.parseInt(aux[5]);
-//                Date lancam = padraoData.parse(aux[6]); 
-//                       
-//                Produto c = new Celulares(id, modelo, marca, qnt, qntMin, preco, lancam);
-//                end.add(c);
-//            }
-//        }
-//        catch (ParseException e){
-//            JOptionPane.showMessageDialog(null,"Houve um erro ao converter valores dentro do arquivo+"
-//                    + " Id do produto: " + id, "Erro", 0);
-//        }
-//            listaProdutos = end;
-//    }
     //Construtores e Metodos para Celulares
     public Celulares getProduto(int id){
         try{
@@ -122,7 +99,33 @@ public class Estoque{
         return acm;
     }
     
+    public String[] getMarcas(){
+        String[] aux = new String[listaProdutos.size()];
+        int indexFim = -1;
+        for (int i = 0; i < listaProdutos.size(); i++) {
+            Celulares p = (Celulares) listaProdutos.get(i);
+            String marca = p.getMarca();
+            boolean repetido = false;
+                for (int j = 0; j < aux.length; j++) { //Testa para saber se é repetido
+                    String str = aux[j];
+                    if(str != null && str.equalsIgnoreCase(marca)){
+                        repetido = true;
+                        break;
+                    }   
+                }
+                if(!repetido){
+                    indexFim++;
+                    aux[indexFim] = marca;                    
+                }       
+        }
+         String[] marcas = new String[indexFim+1];
+         for (int i = 0; i < indexFim+1; i++) {
+            marcas[i] = aux[i];
+        }
+        return marcas;
+    }
     //Métodos de Listagem
+    
     public ArrayList listar(){
         return listaProdutos;
     }
@@ -136,6 +139,7 @@ public class Estoque{
         }
         return aux;
     }
+
     public ArrayList listar(int ano){
     ArrayList aux = new ArrayList();
         for (int i = 0; i < listaProdutos.size(); i++) {
@@ -196,14 +200,14 @@ public class Estoque{
         return true;
     }
     // Encontra um valor para novos Id's
-    private int getNewId(){ 
+    public int getNewId(){ 
         int maiorId = 0;
         for (int i = 0; i < listaProdutos.size(); i++) {
                 Produto p = (Produto) listaProdutos.get(i);
                 if(p.getId() > maiorId){
-                    maiorId = p.getId()+1;
+                    maiorId = p.getId();
                 }
         }
-        return maiorId+1;
+        return maiorId+ 1;
     }
 }
