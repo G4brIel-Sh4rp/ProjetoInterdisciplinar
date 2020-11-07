@@ -43,7 +43,6 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Estoque ");
-        setPreferredSize(new java.awt.Dimension(1000, 700));
 
         desktopPane.setOpaque(false);
         desktopPane.setPreferredSize(new java.awt.Dimension(100, 100));
@@ -56,6 +55,7 @@ public class Menu extends javax.swing.JFrame {
         fileMenu.setText("Produto");
 
         itemConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/clipboard.png"))); // NOI18N
         itemConsultar.setMnemonic('c');
         itemConsultar.setText("Consultar");
         itemConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +66,7 @@ public class Menu extends javax.swing.JFrame {
         fileMenu.add(itemConsultar);
 
         itemEditar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/edit.png"))); // NOI18N
         itemEditar.setMnemonic('e');
         itemEditar.setText("Editar");
         itemEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,6 +82,7 @@ public class Menu extends javax.swing.JFrame {
         editMenu.setText("Adicionar");
 
         itemAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/add-smartphone.png"))); // NOI18N
         itemAdicionar.setMnemonic('c');
         itemAdicionar.setText("Celular");
         itemAdicionar.addActionListener(new java.awt.event.ActionListener() {

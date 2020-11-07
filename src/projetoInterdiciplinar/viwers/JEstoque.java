@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class JEstoque extends javax.swing.JFrame {
     private Estoque etqCell = new Estoque("teste.csv");
     DecimalFormat df = new DecimalFormat("#,###.00");
-    SimpleDateFormat formatarData = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatarData = new SimpleDateFormat("MMM/yyyy");
     
     public JEstoque() {
         initComponents();
@@ -40,6 +40,7 @@ public class JEstoque extends javax.swing.JFrame {
         spinnerPrecoMin.setVisible(false);
         spinnerPrecoMax.setVisible(false);
         lblEntre.setVisible(false);
+        btnSalvar.setVisible(false);
   
         
         
@@ -129,10 +130,15 @@ public class JEstoque extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtBoxValorTotal = new javax.swing.JTextField();
         btnLimpar = new javax.swing.JButton();
+        panelAddSubtract = new javax.swing.JPanel();
+        btnAdd = new javax.swing.JButton();
+        btnSubtract = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consulta");
         setMinimumSize(new java.awt.Dimension(400, 250));
         setPreferredSize(new java.awt.Dimension(900, 600));
         getContentPane().setLayout(null);
@@ -443,7 +449,61 @@ public class JEstoque extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLimpar);
-        btnLimpar.setBounds(630, 460, 60, 50);
+        btnLimpar.setBounds(610, 470, 60, 50);
+
+        btnAdd.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
+        btnAdd.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnAdd.setText("+");
+        btnAdd.setToolTipText("");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnSubtract.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
+        btnSubtract.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnSubtract.setText("-");
+        btnSubtract.setToolTipText("");
+        btnSubtract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubtractActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelAddSubtractLayout = new javax.swing.GroupLayout(panelAddSubtract);
+        panelAddSubtract.setLayout(panelAddSubtractLayout);
+        panelAddSubtractLayout.setHorizontalGroup(
+            panelAddSubtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddSubtractLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(btnSubtract, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(btnAdd)
+                .addGap(37, 37, 37))
+        );
+        panelAddSubtractLayout.setVerticalGroup(
+            panelAddSubtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelAddSubtractLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelAddSubtractLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnSubtract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(panelAddSubtract);
+        panelAddSubtract.setBounds(650, 380, 210, 50);
+
+        btnSalvar.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.focus"));
+        btnSalvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/save.png"))); // NOI18N
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalvar);
+        btnSalvar.setBounds(730, 470, 60, 50);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -585,8 +645,7 @@ public class JEstoque extends javax.swing.JFrame {
         txtBoxQntdMin.setText(Integer.toString(c.getQntMin()));
         txtBoxValorTotal.setText("R$ "+ df.format(c.valorTotal()));
     }//GEN-LAST:event_tblCelularesMouseClicked
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+    private void limpaTudo(){
         limpaTabela();
         txtBoxId.setText("-");
         txtBoxModelo.setText("-");
@@ -597,11 +656,51 @@ public class JEstoque extends javax.swing.JFrame {
         txtBoxQntdMin.setText("-");
         txtBoxValorTotal.setText("-");
         addRowTblCelulares(etqCell.listar());
+        btnSalvar.setVisible(false);
+    }
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpaTudo();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void txtBoxValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBoxValorTotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBoxValorTotalActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        try{
+            int qtd = Integer.parseInt(txtBoxQntd.getText());
+            qtd++;
+            txtBoxQntd.setText(Integer.toString(qtd));
+            btnSalvar.setVisible(true);
+        }
+        catch (Exception c){
+            JOptionPane.showMessageDialog(null,"Sem produto selecionado");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSubtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubtractActionPerformed
+        try{
+            int qtd = Integer.parseInt(txtBoxQntd.getText());
+            if(qtd>0){
+            qtd--;
+            txtBoxQntd.setText(Integer.toString(qtd));
+            btnSalvar.setVisible(true);
+            }
+        }
+        catch (Exception c){
+            JOptionPane.showMessageDialog(null,"Sem produto selecionado");
+        }
+    }//GEN-LAST:event_btnSubtractActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+
+            int id = Integer.parseInt(txtBoxId.getText());
+            Celulares c = etqCell.getProduto(id);
+            int qtd = Integer.parseInt(txtBoxQntd.getText());
+            c.setEstoque(qtd);
+            etqCell.salvar();
+            limpaTudo();
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -640,8 +739,11 @@ public class JEstoque extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner SpinnerId;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBusca;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSubtract;
     private javax.swing.JComboBox<String> comboBoxMarcas;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
@@ -659,6 +761,7 @@ public class JEstoque extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEntre;
+    private javax.swing.JPanel panelAddSubtract;
     private javax.swing.JSpinner spinnerAnoMax;
     private javax.swing.JSpinner spinnerAnoMin;
     private javax.swing.JSpinner spinnerPrecoMax;

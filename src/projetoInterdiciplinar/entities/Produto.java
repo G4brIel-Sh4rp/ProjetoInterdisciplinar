@@ -26,7 +26,18 @@ public abstract class Produto {
     
     public abstract void atualizaEstoque (int qnt); // para incremento e decremento do valor estoque
 
-    public void setEstoque (int qnt){     
+    public void setEstoque (int qnt){
+       try{
+            if (qntEstoque + qnt < 0){
+                throw new Exception("Impossivel retirar! quantidade em estoque não pode ser menor que 0");
+            }
+            else{
+                qntEstoque = qnt; 
+            }
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", 0);
+        }
     }
     
     //métodos get
