@@ -2,14 +2,13 @@
 package projetoInterdiciplinar.controler;
 
 import projetoInterdiciplinar.viwers.*;
-import projetoInterdiciplinar.controler.Estoque;
 import projetoInterdiciplinar.controler.helpers.HelperAdicionarCelular;
 import projetoInterdiciplinar.entities.Celulares;
         
 public class ControllerAdicionar {
-    private AdicionarCelular view;
-    private Estoque etqCell;
-    private HelperAdicionarCelular helper;
+    private final AdicionarCelular view;
+    private final Estoque etqCell;
+    private final HelperAdicionarCelular helper;
     
     public ControllerAdicionar(AdicionarCelular view) {
         this.view = view;

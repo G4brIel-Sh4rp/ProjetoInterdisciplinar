@@ -8,7 +8,7 @@ import projetoInterdiciplinar.viwers.AdicionarCelular;
 import projetoInterdiciplinar.entities.Celulares;
 
 public class HelperAdicionarCelular {
-    private AdicionarCelular view;
+    private final AdicionarCelular view;
 
     public HelperAdicionarCelular(AdicionarCelular view) {
         this.view = view;
@@ -22,7 +22,7 @@ public class HelperAdicionarCelular {
             int qtd =(int) view.getSpinnerQtd().getValue();
             int qtdMin = (int) view.getSpinnerQtdMin().getValue();
              
-            Date lancamento = (Date) view.getSpinnerData().getValue();;
+            Date lancamento = (Date) view.getSpinnerData().getValue();
             float preco = (float) view.getSpinnerPreco().getValue();
             c = new Celulares(id,nome, marca, qtd, qtdMin, preco,lancamento);
         }

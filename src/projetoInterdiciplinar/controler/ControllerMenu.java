@@ -22,5 +22,11 @@ public class ControllerMenu {
     }
     public void navegarConsulta(){
         JEstoque estoque = new JEstoque();
+        estoque.setVisible(true);
+    }
+    public void navegarEditarProduto(){
+        EditarProduto editar = new EditarProduto();
+        view.addComponentDesktopPane(editar);
+        editar.setVisible(true);
     }
 }

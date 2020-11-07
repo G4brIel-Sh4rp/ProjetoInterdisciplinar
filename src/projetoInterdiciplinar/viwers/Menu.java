@@ -30,6 +30,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         desktopPane = new javax.swing.JDesktopPane();
+        jLabel2 = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         itemConsultar = new javax.swing.JMenuItem();
@@ -41,15 +42,21 @@ public class Menu extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controle de Estoque ");
         setPreferredSize(new java.awt.Dimension(1000, 700));
 
         desktopPane.setOpaque(false);
         desktopPane.setPreferredSize(new java.awt.Dimension(100, 100));
 
-        fileMenu.setMnemonic('f');
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/BackgroundI.jpg"))); // NOI18N
+        desktopPane.add(jLabel2);
+        jLabel2.setBounds(0, 0, 1000, 700);
+
+        fileMenu.setMnemonic('P');
         fileMenu.setText("Produto");
 
-        itemConsultar.setMnemonic('o');
+        itemConsultar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemConsultar.setMnemonic('c');
         itemConsultar.setText("Consultar");
         itemConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,16 +65,23 @@ public class Menu extends javax.swing.JFrame {
         });
         fileMenu.add(itemConsultar);
 
-        itemEditar.setMnemonic('s');
+        itemEditar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemEditar.setMnemonic('e');
         itemEditar.setText("Editar");
+        itemEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEditarActionPerformed(evt);
+            }
+        });
         fileMenu.add(itemEditar);
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
+        editMenu.setMnemonic('A');
         editMenu.setText("Adicionar");
 
-        itemAdicionar.setMnemonic('t');
+        itemAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemAdicionar.setMnemonic('c');
         itemAdicionar.setText("Celular");
         itemAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +92,7 @@ public class Menu extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
-        helpMenu.setMnemonic('h');
+        helpMenu.setMnemonic('C');
         helpMenu.setText("Créditos");
 
         contentMenuItem.setMnemonic('c');
@@ -97,23 +111,27 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 779, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsultarActionPerformed
-
+        controller.navegarConsulta();
     }//GEN-LAST:event_itemConsultarActionPerformed
 
     private void itemAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAdicionarActionPerformed
         controller.navergarAdicionar();
     }//GEN-LAST:event_itemAdicionarActionPerformed
+
+    private void itemEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEditarActionPerformed
+        controller.navegarEditarProduto();
+    }//GEN-LAST:event_itemEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,6 +182,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAdicionar;
     private javax.swing.JMenuItem itemConsultar;
     private javax.swing.JMenuItem itemEditar;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

@@ -190,7 +190,7 @@ public class Estoque{
     // Métodos internos
     
     //verifica se já existe o mesmo id, se sim : false.
-    private boolean verificaId(int id) {  
+    public boolean verificaId(int id) {  
         for (int i = 0; i < listaProdutos.size(); i++) {
                 Produto p = (Produto) listaProdutos.get(i);
                 if(p.getId() == id){
