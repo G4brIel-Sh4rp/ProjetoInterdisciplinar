@@ -1,8 +1,6 @@
 
 package projetoInterdiciplinar.controler;
 
-import javax.management.relation.Relation;
-import javax.swing.plaf.DesktopPaneUI;
 import projetoInterdiciplinar.viwers.*;
 
 
@@ -14,12 +12,13 @@ public class ControllerMenu {
         this.view = view;
     }
     
+    //Métodos de navegação
+    
     public void navergarAdicionar(){
         AdicionarCelular adicionar = new AdicionarCelular();
         view.addComponentDesktopPane(adicionar);
         adicionar.setVisible(true);
        
-
     }
     public void navegarConsulta(){
         JEstoque estoque = new JEstoque();

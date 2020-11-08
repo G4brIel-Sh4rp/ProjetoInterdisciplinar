@@ -1,7 +1,6 @@
 
 package projetoInterdiciplinar.entities;
 
-import projetoInterdiciplinar.entities.Produto;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import java.text.DateFormat;
@@ -11,7 +10,7 @@ import java.text.DecimalFormat;
 public class Celulares extends Produto{
     private int qntMin;
     private Date dataLancamento;    
-    private DateFormat padraoData = new SimpleDateFormat("dd/MM/yyyy");
+    private final DateFormat padraoData = new SimpleDateFormat("dd/MM/yyyy");
     
     public Celulares (int id, String modelo, String marca, int qnt, int qntMin, float preco, Date lancamento){
         this.id = id;
@@ -23,6 +22,8 @@ public class Celulares extends Produto{
         this.dataLancamento = lancamento;
     }
     
+    //Método set
+    
     public void setTudo(String modelo, String marca, int qnt, int qntMin, float preco, Date lancamento){
         this.nome = validaNome(modelo);
         this.marca = validaNome(marca);      
@@ -32,8 +33,6 @@ public class Celulares extends Produto{
         this.dataLancamento = lancamento;
     }
     
-    //metodos set
-    
     //metodos get
     public Date getLancamento(){
         return dataLancamento;
@@ -42,21 +41,7 @@ public class Celulares extends Produto{
         return qntMin;
     }
     
-    //Dos métodos abstratos:
-    @Override
-    public void atualizaEstoque (int qnt){ // para incremento e decremento do valor estoque
-        try{
-            if (qntEstoque + qnt < 0){
-                throw new Exception("Impossivel retirar! quantidade em estoque não pode ser menor que 0");
-            }
-            else{
-                qntEstoque += qntEstoque + qnt; 
-            }
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Erro", 0);
-        }
-    } 
+    //Dos métodos abstratos:  
     @Override
         protected String validaNome (String nome) throws ClassFormatError{  
         try{

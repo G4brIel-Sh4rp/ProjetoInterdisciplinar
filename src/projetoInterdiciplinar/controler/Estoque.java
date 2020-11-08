@@ -4,7 +4,6 @@ package projetoInterdiciplinar.controler;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeParseException;
 import projetoInterdiciplinar.entities.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -187,7 +186,8 @@ public class Estoque{
         }
         return aux;
     }
-    // Métodos internos
+    
+    // Métodos uteis para ID
     
     //verifica se já existe o mesmo id, se sim : false.
     public boolean verificaId(int id) {  

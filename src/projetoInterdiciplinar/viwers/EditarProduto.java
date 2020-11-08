@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projetoInterdiciplinar.viwers;
 
 import java.text.DateFormat;
@@ -17,10 +13,6 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import projetoInterdiciplinar.controler.*;
 
-/**
- *
- * @author Gabriel
- */
 public class EditarProduto extends javax.swing.JInternalFrame {
 
     private final ControllerEditar controller;

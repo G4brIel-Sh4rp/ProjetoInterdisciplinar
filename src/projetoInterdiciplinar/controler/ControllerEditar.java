@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projetoInterdiciplinar.controler;
 
 import java.text.SimpleDateFormat;
@@ -11,10 +7,6 @@ import projetoInterdiciplinar.controler.helpers.HelperEditarProduto;
 import projetoInterdiciplinar.entities.Celulares;
 import projetoInterdiciplinar.viwers.EditarProduto;
 
-/**
- *
- * @author Gabriel
- */
 public class ControllerEditar {
     
     private final Estoque estoque;
@@ -27,6 +19,7 @@ public class ControllerEditar {
         this.helper = new HelperEditarProduto(view);
     }
     
+    //Do botao busca
     public void editar(){
         int id = (int) view.getSpinnerID().getValue();
         if(!estoque.verificaId(id)){
@@ -38,6 +31,7 @@ public class ControllerEditar {
             view.ExibirMensagem("Id não existente!");
         }
     }
+    //Do botao salvar
     public void salvar(){
             int id = (int) view.getSpinnerID().getValue();
             
@@ -55,6 +49,7 @@ public class ControllerEditar {
             view.ExibirMensagem("Produto Adicionado!");
             cancelar();
     }
+    //Do botao cancelar
     public void cancelar(){
         helper.limpaTudo();
         helper.lockInputs();

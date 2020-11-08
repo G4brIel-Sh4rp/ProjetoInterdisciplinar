@@ -29,7 +29,7 @@ package projetoInterdiciplinar.entities;
           JOptionPane.showMessageDialog(null, e.getMessage() + "O carregador não pode ser instanciado");
       }
      }
-    //
+    // Trasforma arquivo em cadeia de String's
     public ArrayList<String[]> lerLinhas(){
         ArrayList listValores = new ArrayList<String[]>();
         try{
@@ -52,6 +52,7 @@ package projetoInterdiciplinar.entities;
   
   
   //metodos internos
+  // Inicia arquivo pela raiz da pasta do projeto
   private File getArquivoInterno (String fileName){
       File arq = new File("");
       try{        

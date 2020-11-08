@@ -1,24 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projetoInterdiciplinar.viwers;
 
 import javax.swing.JTextArea;
-import projetoInterdiciplinar.controler.ControllerCreditos;
 
-/**
- *
- * @author Gabriel
- */
 public class Creditos extends javax.swing.JInternalFrame {
 
-    private final ControllerCreditos controller;
     
     public Creditos() {
         initComponents();
-        this.controller = new ControllerCreditos(this);
     }
 
     /**

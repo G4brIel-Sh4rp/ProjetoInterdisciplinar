@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projetoInterdiciplinar.viwers;
 
 import javax.swing.JTable;
 import projetoInterdiciplinar.controler.ControllerRelatorio;
 
-/**
- *
- * @author Gabriel
- */
 public class Relatorio extends javax.swing.JInternalFrame {
 
      private final ControllerRelatorio controller;

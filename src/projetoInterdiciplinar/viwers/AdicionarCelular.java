@@ -14,9 +14,9 @@ import javax.swing.SpinnerModel;
 import projetoInterdiciplinar.controler.ControllerAdicionar;
 
 public class AdicionarCelular extends javax.swing.JInternalFrame {
-    private DecimalFormat df;
-    private SimpleDateFormat formatarData;
-    private ControllerAdicionar controller;
+    private final DecimalFormat df;
+    private final SimpleDateFormat formatarData;
+    private final ControllerAdicionar controller;
     
     public AdicionarCelular() {
         initComponents();

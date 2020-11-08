@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package projetoInterdiciplinar.viwers;
 
-/**
- *
- * @author Gabriel
- */
+
 public class Sobre extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Sobre
-     */
+
     public Sobre() {
         initComponents();
     }

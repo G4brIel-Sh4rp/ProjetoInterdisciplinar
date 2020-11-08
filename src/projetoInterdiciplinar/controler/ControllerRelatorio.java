@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.*;
 import projetoInterdiciplinar.entities.Celulares;
 import projetoInterdiciplinar.viwers.Relatorio;
 

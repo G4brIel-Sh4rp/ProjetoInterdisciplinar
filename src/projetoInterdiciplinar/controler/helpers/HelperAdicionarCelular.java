@@ -1,7 +1,6 @@
 
 package projetoInterdiciplinar.controler.helpers;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import projetoInterdiciplinar.viwers.AdicionarCelular;
@@ -26,9 +25,6 @@ public class HelperAdicionarCelular {
             float preco = (float) view.getSpinnerPreco().getValue();
             c = new Celulares(id,nome, marca, qtd, qtdMin, preco,lancamento);
         }
-//        catch (ParseException p){
-//            view.exibirMensagem("Ocorreu um erro ao criar o modelo");
-//        }
         catch(Exception e ){
             view.exibirMensagem("Ocorreu um erro ao criar o modelo");
         }
