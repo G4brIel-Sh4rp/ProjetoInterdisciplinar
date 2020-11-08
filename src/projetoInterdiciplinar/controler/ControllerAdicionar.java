@@ -12,7 +12,7 @@ public class ControllerAdicionar {
     
     public ControllerAdicionar(AdicionarCelular view) {
         this.view = view;
-        etqCell = new Estoque("teste.csv");
+        etqCell = new Estoque("produtos.csv");
         helper = new HelperAdicionarCelular(view);
     }
     

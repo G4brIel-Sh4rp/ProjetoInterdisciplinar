@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 
 public class JEstoque extends javax.swing.JFrame {
-    private Estoque etqCell = new Estoque("teste.csv");
+    private Estoque etqCell = new Estoque("produtos.csv");
     DecimalFormat df = new DecimalFormat("#,###.00");
     SimpleDateFormat formatarData = new SimpleDateFormat("MMM/yyyy");
     
@@ -597,8 +597,9 @@ public class JEstoque extends javax.swing.JFrame {
                 addRowTblCelulares(etqCell.listar(marca));
                 break;
             case "Preço":
-                    float pMin = (float) spinnerPrecoMin.getValue();
-                    float pMax = (float) spinnerPrecoMax.getValue();
+                    float pMin = (float)spinnerPrecoMin.getValue();
+                    double xMax = (double) spinnerPrecoMax.getValue();
+                    float pMax = (float) xMax;
                     limpaTabela();
                     addRowTblCelulares(etqCell.listar(pMin,pMax));
                     break;

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="414" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="435" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <Properties>
+        <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+        <Property name="verticalScrollBarPolicy" type="int" value="21"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="Objetivo:&#xa;Este programa foi desenvolvido com o objetivo de entrega do projeto           Interdisciplinar do Curso de ADS na faculdade Cruzeiro do Sul.&#xa;&#xa;Fun&#xe7;&#xf5;es:&#xa;Este programa disp&#xf5;es das seguintes funcionalidade: consultar banco de dados, adicionar produto ao banco, e edita-lo. Al&#xe9;m de gerar um relatorio  contendo os itens com quantidade abaixo do m&#xed;nimo desejado.&#xa;&#xa;Sobre o Banco de Dados:&#xa;Atrav&#xe9;s da utiliza&#xe7;&#xe3;o de classes java para ler e escrever arquivos, foi           criado as classes loader e saver, em que respectivamente fazem leitura e escrita num arquivo na raiz da pasta (produtos.csv), onde guarda os dados&#xa;&#xa;Sobre o desenvolvimento:&#xa;Este programa foi desenvolvido em diversas fases, todo o progresso podeser acompanhado no GitHub (https://github.com/G4brIel-Sh4rp/ProjetoInterdisciplinar/commits/master). Obs.: Fora utilizado a estrutura&#xe7;&#xe3;o de              programa MVC, essa foi a primeira aplica&#xe7;&#xe3;o feita nesta estrutura,  por        tanto haveria poss&#xed;bilidade de algumas melhoras.&#xa;&#xa;Aos avaliadores:&#xa;O desenvolvimento deste programa foi realizado por um iniciante, por tantoh&#xe1; diversos fatores que poderiam ser melhorados em minha maneira de programar. Sendo assim por favor me informar se gostou e tamb&#xe9;m           cr&#xed;ticas sobre. E-mail: gabriel.pds2001@gmail.com"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

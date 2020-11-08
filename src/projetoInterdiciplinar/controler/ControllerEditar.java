@@ -22,7 +22,7 @@ public class ControllerEditar {
     private final HelperEditarProduto helper;
        
     public ControllerEditar(EditarProduto view) {
-        this.estoque = new Estoque("teste.csv");
+        this.estoque = new Estoque("produtos.csv");
         this.view = view;
         this.helper = new HelperEditarProduto(view);
     }
@@ -53,6 +53,7 @@ public class ControllerEditar {
             c.setTudo(nome, marca, qtd, qtdMin, preco, lancamento);
             estoque.salvar();
             view.ExibirMensagem("Produto Adicionado!");
+            cancelar();
     }
     public void cancelar(){
         helper.limpaTudo();

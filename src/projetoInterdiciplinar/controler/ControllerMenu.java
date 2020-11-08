@@ -1,6 +1,7 @@
 
 package projetoInterdiciplinar.controler;
 
+import javax.management.relation.Relation;
 import javax.swing.plaf.DesktopPaneUI;
 import projetoInterdiciplinar.viwers.*;
 
@@ -28,5 +29,21 @@ public class ControllerMenu {
         EditarProduto editar = new EditarProduto();
         view.addComponentDesktopPane(editar);
         editar.setVisible(true);
+    }
+
+    public void navegarRelatorio() {
+        Relatorio relatorio = new Relatorio();
+        view.addComponentDesktopPane(relatorio);
+        relatorio.setVisible(true);
+    }    
+    public void navegarSobre(){
+        Sobre sobre = new Sobre();
+        view.addComponentDesktopPane(sobre);
+        sobre.setVisible(true);
+    }
+    public void navegarCreditos(){
+        Creditos credit = new Creditos();
+        view.addComponentDesktopPane(credit);
+        credit.setVisible(true);
     }
 }

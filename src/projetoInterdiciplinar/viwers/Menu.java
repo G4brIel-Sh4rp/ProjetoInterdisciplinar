@@ -19,7 +19,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         controller = new ControllerMenu(this);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,11 +35,12 @@ public class Menu extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         itemConsultar = new javax.swing.JMenuItem();
         itemEditar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         itemAdicionar = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        sobreItem = new javax.swing.JMenuItem();
+        creditoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Estoque ");
@@ -76,12 +77,23 @@ public class Menu extends javax.swing.JFrame {
         });
         fileMenu.add(itemEditar);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/relatorio (1).png"))); // NOI18N
+        jMenuItem1.setMnemonic('R');
+        jMenuItem1.setText("Relatorio");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        fileMenu.add(jMenuItem1);
+
         menuBar.add(fileMenu);
 
         editMenu.setMnemonic('A');
         editMenu.setText("Adicionar");
 
-        itemAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        itemAdicionar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.ALT_DOWN_MASK));
         itemAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/add-smartphone.png"))); // NOI18N
         itemAdicionar.setMnemonic('c');
         itemAdicionar.setText("Celular");
@@ -94,16 +106,28 @@ public class Menu extends javax.swing.JFrame {
 
         menuBar.add(editMenu);
 
-        helpMenu.setMnemonic('C');
-        helpMenu.setText("Créditos");
+        helpMenu.setMnemonic('S');
+        helpMenu.setText("Sobre");
+        helpMenu.setToolTipText("");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
+        sobreItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/projetoInterdiciplinar/viwers/imagem/ponto-de-interrogacao.png"))); // NOI18N
+        sobreItem.setMnemonic('c');
+        sobreItem.setText("Sobre");
+        sobreItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sobreItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(sobreItem);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
+        creditoItem.setMnemonic('a');
+        creditoItem.setText("Crédito");
+        creditoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creditoItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(creditoItem);
 
         menuBar.add(helpMenu);
 
@@ -134,6 +158,18 @@ public class Menu extends javax.swing.JFrame {
     private void itemEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEditarActionPerformed
         controller.navegarEditarProduto();
     }//GEN-LAST:event_itemEditarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        controller.navegarRelatorio();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void sobreItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sobreItemActionPerformed
+        controller.navegarSobre();
+    }//GEN-LAST:event_sobreItemActionPerformed
+
+    private void creditoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creditoItemActionPerformed
+        controller.navegarCreditos();
+    }//GEN-LAST:event_creditoItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,8 +211,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
+    private javax.swing.JMenuItem creditoItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
@@ -185,7 +220,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemConsultar;
     private javax.swing.JMenuItem itemEditar;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem sobreItem;
     // End of variables declaration//GEN-END:variables
 
 }
